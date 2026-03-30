@@ -2,6 +2,8 @@
 
 import { Resend } from "resend";
 
+import { auth } from "@clerk/nextjs/server";
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 /**
@@ -16,6 +18,11 @@ const resend = new Resend(process.env.RESEND_API_KEY);
  */
 export async function sendEmail({ to, subject, react }) {
   try {
+    const { userId } = await auth();
+    if (!userId) {
+      throw new Error("Unauthorized");
+    }
+
     const data = await resend.emails.send({
       from: "Finova <onboarding@resend.dev>",
       to,

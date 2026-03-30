@@ -6,17 +6,44 @@ const nextConfig = {
         protocol: "https",
         hostname: "randomuser.me",
       },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+      },
     ],
   },
   experimental: {
     serverActions: {
-<<<<<<< HEAD
-      bodySizeLimit: "5mb",
-=======
       bodySizeLimit: "5mb", // Allow receipt image uploads up to 5 MB
->>>>>>> 450cce07a4a23b4718c7daca89a313c3f874b184
     },
+  },
+
+  // ── Security Headers ────────────────────────────────────────────────────────
+  async headers() {
+    return [
+      {
+        source: "/(.*)",
+        headers: [
+          { key: "X-Frame-Options", value: "DENY" },
+          { key: "X-Content-Type-Options", value: "nosniff" },
+          { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+          {
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
+          },
+          {
+            key: "X-DNS-Prefetch-Control",
+            value: "on",
+          },
+          {
+            key: "Strict-Transport-Security",
+            value: "max-age=63072000; includeSubDomains; preload",
+          },
+        ],
+      },
+    ];
   },
 };
 
 export default nextConfig;
+

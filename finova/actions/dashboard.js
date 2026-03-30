@@ -114,7 +114,13 @@ export async function getUserAccounts() {
 
     return accounts.map(serializeTransaction);
   } catch (error) {
-    throw new Error(error.message);
+    const msg = error.message || "";
+    // Gracefully handle DB unavailability (e.g. no connection in dev)
+    if (msg.includes("connect") || msg.includes("ECONNREFUSED") || msg.includes("Unauthorized") || msg.includes("User not found")) {
+      return [];
+    }
+    console.error("[getUserAccounts]", msg);
+    throw new Error("Failed to load accounts. Please try again.");
   }
 }
 
@@ -165,6 +171,11 @@ export async function getDashboardData() {
 
     return transactions.map(serializeTransaction);
   } catch (error) {
-    throw new Error(error.message);
+    const msg = error.message || "";
+    if (msg.includes("connect") || msg.includes("ECONNREFUSED") || msg.includes("Unauthorized") || msg.includes("User not found")) {
+      return [];
+    }
+    console.error("[getDashboardData]", msg);
+    throw new Error("Failed to load transactions. Please try again.");
   }
 }

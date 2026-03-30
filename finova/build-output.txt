@@ -1,0 +1,33 @@
+  ▲ Next.js 15.0.0
+  - Environments: .env
+
+   Creating an optimized production build ...
+Failed to compile.
+
+./app/(main)/account/[id]/_components/account-chart.jsx
+Module not found: Can't resolve 'recharts'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/(main)/account/[id]/_components/account-chart.jsx
+Module not found: Can't resolve '@/components/ui/card'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/(main)/account/[id]/_components/account-chart.jsx
+Module not found: Can't resolve '@/components/ui/select'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/(main)/account/[id]/_components/transaction-table.jsx
+Module not found: Can't resolve 'sonner'
+
+https://nextjs.org/docs/messages/module-not-found
+
+./app/(main)/account/[id]/_components/transaction-table.jsx
+Module not found: Can't resolve 'lucide-react'
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+> Build failed because of webpack errors

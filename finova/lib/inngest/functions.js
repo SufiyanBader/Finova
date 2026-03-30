@@ -164,8 +164,7 @@ Example: ["insight 1","insight 2","insight 3"]
  * monthly budget. Only one alert is sent per calendar month.
  */
 export const checkBudgetAlert = inngest.createFunction(
-  { id: "check-budget-alerts", name: "Check Budget Alerts" },
-  { cron: "0 */6 * * *" },
+  { id: "check-budget-alerts", name: "Check Budget Alerts", triggers: [{ cron: "0 */6 * * *" }] },
   async ({ step }) => {
     const budgets = await step.run("fetch-budgets", async () => {
       return await db.budget.findMany({
@@ -241,8 +240,8 @@ export const triggerRecurringTransactions = inngest.createFunction(
   {
     id: "trigger-recurring-transactions",
     name: "Trigger Recurring Transactions",
+    triggers: [{ cron: "0 0 * * *" }],
   },
-  { cron: "0 0 * * *" },
   async ({ step }) => {
     const recurringTransactions = await step.run(
       "fetch-recurring-transactions",
@@ -289,8 +288,8 @@ export const processRecurringTransaction = inngest.createFunction(
       period: "1m",
       key: "event.data.userId",
     },
+    triggers: [{ event: "transaction.recurring.process" }],
   },
-  { event: "transaction.recurring.process" },
   async ({ event, step }) => {
     if (!event.data?.transactionId || !event.data?.userId) {
       throw new Error("Invalid event data: transactionId and userId are required");
@@ -359,8 +358,7 @@ export const processRecurringTransaction = inngest.createFunction(
  * Generates a personalised financial report for every user and emails it.
  */
 export const generateMonthlyReports = inngest.createFunction(
-  { id: "generate-monthly-reports", name: "Generate Monthly Reports" },
-  { cron: "0 0 1 * *" },
+  { id: "generate-monthly-reports", name: "Generate Monthly Reports", triggers: [{ cron: "0 0 1 * *" }] },
   async ({ step }) => {
     const users = await step.run("fetch-users", async () => {
       return await db.user.findMany({ include: { accounts: true } });
