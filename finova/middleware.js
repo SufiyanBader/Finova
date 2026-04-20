@@ -1,9 +1,6 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
-import { NextResponse } from "next/server";
 
-// ---------------------------------------------------------------------------
-// Route protection — all routes below require an authenticated Clerk session
-// ---------------------------------------------------------------------------
+// Routes that require an authenticated Clerk session
 const isProtectedRoute = createRouteMatcher([
   "/dashboard(.*)",
   "/account(.*)",
@@ -15,24 +12,12 @@ const isProtectedRoute = createRouteMatcher([
   "/trips(.*)",
 ]);
 
-// ---------------------------------------------------------------------------
-// Middleware
-// NOTE: Rate-limiting is intentionally NOT done here.
-// Upstash/ratelimit has Node.js internals that crash the Vercel Edge Runtime.
-// Per-action rate limiting is enforced in lib/rate-limit.js (Node.js runtime).
-// ---------------------------------------------------------------------------
+// @clerk/nextjs v6 middleware — use auth.protect() (async) for route guarding.
+// Rate-limiting lives in lib/rate-limit.js (Node.js runtime, per server action).
 export default clerkMiddleware(async (auth, request) => {
-  // IMPORTANT: auth() inside clerkMiddleware is synchronous in @clerk/nextjs v6.
-  // Do NOT await it — awaiting returns a Promise whose .userId is always undefined,
-  // which redirects every authenticated user to sign-in.
   if (isProtectedRoute(request)) {
-    const authObj = auth();
-    if (!authObj.userId) {
-      return authObj.redirectToSignIn();
-    }
+    await auth.protect();
   }
-
-  return NextResponse.next();
 });
 
 export const config = {
