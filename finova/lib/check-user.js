@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { currentUser } from "@clerk/nextjs/server";
 import { db } from "@/lib/prisma";
 
@@ -12,7 +13,7 @@ import { db } from "@/lib/prisma";
  *
  * @returns {Promise<import("@prisma/client").User | null>}
  */
-export async function checkUser() {
+export const checkUser = cache(async function checkUser() {
   try {
     const user = await currentUser();
     if (!user) return null;
@@ -57,5 +58,4 @@ export async function checkUser() {
     }
     return null;
   }
-}
-
+});
