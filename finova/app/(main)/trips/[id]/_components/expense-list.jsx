@@ -24,7 +24,7 @@ import { deleteTripExpense } from "@/actions/trips";
 import useFetch from "@/hooks/use-fetch";
 import { formatCurrency, getCurrencySymbol } from "@/lib/currency";
 
-export default function ExpenseList({ expenses, tripId, baseCurrency }) {
+export default function ExpenseList({ expenses, tripId: _tripId, baseCurrency }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [categoryFilter, setCategoryFilter] = useState("");
   const [sortBy, setSortBy] = useState("date-desc");
