@@ -57,7 +57,7 @@ export default function NotificationBell() {
       case "goal-completed":
         return <div className="w-2 h-2 rounded-full bg-green-500 mt-1.5" />;
       case "recurring":
-        return <div className="w-2 h-2 rounded-full bg-blue-500 mt-1.5" />;
+        return <div className="w-2 h-2 rounded-full bg-emerald-500 mt-1.5" />;
       default:
         return <div className="w-2 h-2 rounded-full bg-gray-500 mt-1.5" />;
     }
@@ -109,7 +109,7 @@ export default function NotificationBell() {
                 key={notification.id}
                 className={cn(
                   "flex gap-3 p-4 border-b last:border-0 hover:bg-muted/50 transition-colors cursor-pointer",
-                  !notification.isRead && "bg-blue-50 dark:bg-blue-950/20"
+                  !notification.isRead && "bg-emerald-50 dark:bg-emerald-950/20"
                 )}
               >
                 {getNotificationIcon(notification.type)}

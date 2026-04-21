@@ -208,13 +208,13 @@ export default function AddExpenseSheet({ tripId, baseCurrency }) {
 
               {/* Live rate preview */}
               {ratePreview && watchedCurrency !== baseCurrency && (
-                <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-3 flex items-center gap-2 text-sm">
-                  <ArrowRightLeft className="h-4 w-4 text-blue-600 flex-shrink-0" />
+                <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-lg p-3 flex items-center gap-2 text-sm">
+                  <ArrowRightLeft className="h-4 w-4 text-emerald-600 flex-shrink-0" />
                   <div>
-                    <p className="font-medium text-blue-800 dark:text-blue-300">
+                    <p className="font-medium text-emerald-800 dark:text-emerald-300">
                       {formatCurrency(ratePreview.converted, baseCurrency)}
                     </p>
-                    <p className="text-xs text-blue-600 dark:text-blue-400">
+                    <p className="text-xs text-emerald-600 dark:text-emerald-400">
                       Rate: 1 {watchedCurrency} ={" "}
                       {ratePreview.rate.toFixed(4)} {baseCurrency}
                     </p>

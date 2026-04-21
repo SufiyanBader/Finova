@@ -37,7 +37,7 @@ export default function CategoryBreakdownChart({ data }) {
       return (
         <div className="bg-white dark:bg-gray-800 p-2 border rounded shadow">
           <p className="font-semibold">{payload[0].payload.category}</p>
-          <p className="text-blue-600">{formatCurrency(payload[0].value)}</p>
+          <p className="text-emerald-600">{formatCurrency(payload[0].value)}</p>
         </div>
       );
     }

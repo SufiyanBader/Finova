@@ -18,7 +18,7 @@ export const transactionRateLimit = redis
       redis,
       limiter: Ratelimit.tokenBucket(10, "1 h", 10),
       analytics: true,
-      prefix: "finova:transaction",
+      prefix: "ai-finance:transaction",
     })
   : null;
 
@@ -28,7 +28,7 @@ export const authRateLimit = redis
       redis,
       limiter: Ratelimit.slidingWindow(5, "1 m"),
       analytics: true,
-      prefix: "finova:auth",
+      prefix: "ai-finance:auth",
     })
   : null;
 
@@ -38,7 +38,7 @@ export const apiRateLimit = redis
       redis,
       limiter: Ratelimit.slidingWindow(30, "1 m"),
       analytics: true,
-      prefix: "finova:api",
+      prefix: "ai-finance:api",
     })
   : null;
 
@@ -48,6 +48,6 @@ export const aiRateLimit = redis
       redis,
       limiter: Ratelimit.fixedWindow(3, "1 m"),
       analytics: true,
-      prefix: "finova:ai",
+      prefix: "ai-finance:ai",
     })
   : null;

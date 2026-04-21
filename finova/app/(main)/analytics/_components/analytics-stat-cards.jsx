@@ -41,11 +41,11 @@ export default function AnalyticsStatCards({ data }) {
         <CardContent className="p-6 flex flex-col justify-between h-full">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-muted-foreground">Savings Rate</span>
-            <div className="bg-blue-100 p-2 rounded-full">
-              <PiggyBank className="h-4 w-4 text-blue-600" />
+            <div className="bg-emerald-100 p-2 rounded-full">
+              <PiggyBank className="h-4 w-4 text-emerald-600" />
             </div>
           </div>
-          <p className="text-2xl font-bold text-blue-600 mt-4">{data.savingsRate}%</p>
+          <p className="text-2xl font-bold text-emerald-600 mt-4">{data.savingsRate}%</p>
         </CardContent>
       </Card>
 
@@ -53,11 +53,11 @@ export default function AnalyticsStatCards({ data }) {
         <CardContent className="p-6 flex flex-col justify-between h-full">
           <div className="flex items-center justify-between">
             <span className="text-sm font-medium text-muted-foreground">Transactions Processed</span>
-            <div className="bg-purple-100 p-2 rounded-full">
-              <Activity className="h-4 w-4 text-purple-600" />
+            <div className="bg-teal-100 p-2 rounded-full">
+              <Activity className="h-4 w-4 text-teal-600" />
             </div>
           </div>
-          <p className="text-2xl font-bold text-purple-600 mt-4">{data.transactionCount}</p>
+          <p className="text-2xl font-bold text-teal-600 mt-4">{data.transactionCount}</p>
         </CardContent>
       </Card>
     </div>

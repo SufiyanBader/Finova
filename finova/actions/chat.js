@@ -48,7 +48,7 @@ export async function sendChatMessage(message, conversationHistory) {
       .join(", ");
 
     const systemPrompt = `
-      You are Finova AI, a helpful personal finance assistant.
+      You are AI Finance assistant, a helpful personal finance assistant.
       You have access to the user's financial data for the last 90 days.
       
       User: ${user.name || "User"}
@@ -84,7 +84,7 @@ export async function sendChatMessage(message, conversationHistory) {
         role: "model",
         parts: [
           {
-            text: "I have received your financial data and guidelines. I am ready to assist you as Finova AI. How can I help you today?",
+            text: "I have received your financial data and guidelines. I am ready to assist you as AI Finance assistant. How can I help you today?",
           },
         ],
       },

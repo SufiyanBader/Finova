@@ -12,9 +12,9 @@ export async function generateMetadata({ params }) {
   const { id } = await params;
   try {
     const trip = await getTripById(id);
-    return { title: `${trip.name} | Finova Trips` };
+    return { title: `${trip.name} | AI Finance Trips` };
   } catch {
-    return { title: "Trip | Finova" };
+    return { title: "Trip | AI Finance" };
   }
 }
 

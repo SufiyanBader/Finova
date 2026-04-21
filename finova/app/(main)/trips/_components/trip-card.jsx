@@ -55,7 +55,7 @@ export default function TripCard({ trip }) {
                 Completed
               </Badge>
             ) : (
-              <Badge className="bg-blue-100 text-blue-700 border-0 dark:bg-blue-950/40">
+              <Badge className="bg-emerald-100 text-emerald-700 border-0 dark:bg-emerald-950/40">
                 Active
               </Badge>
             )}
@@ -83,8 +83,8 @@ export default function TripCard({ trip }) {
             {/* Total spent */}
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <div className="bg-blue-50 dark:bg-blue-950/30 rounded-lg p-2">
-                  <Wallet className="h-4 w-4 text-blue-600" />
+                <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-lg p-2">
+                  <Wallet className="h-4 w-4 text-emerald-600" />
                 </div>
                 <div>
                   <p className="text-xs text-muted-foreground">Total Spent</p>

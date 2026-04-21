@@ -80,7 +80,7 @@ export default function GoalCard({ goal, accounts: _accounts }) {
     parseFloat(percentComplete) >= 100
       ? "[&>div]:bg-green-500"
       : parseFloat(percentComplete) >= 75
-      ? "[&>div]:bg-blue-500"
+      ? "[&>div]:bg-emerald-500"
       : parseFloat(percentComplete) >= 50
       ? "[&>div]:bg-yellow-500"
       : "[&>div]:bg-red-400";
@@ -90,7 +90,7 @@ export default function GoalCard({ goal, accounts: _accounts }) {
       <CardHeader>
         <div className="flex justify-between items-start">
           <div className="flex items-center gap-2">
-            <Target className="h-5 w-5 text-blue-600" />
+            <Target className="h-5 w-5 text-emerald-600" />
             <CardTitle className="text-base">{goal.name}</CardTitle>
           </div>
           <div className="flex items-center gap-1">

@@ -86,12 +86,12 @@ export default function AddTransactionForm({
           },
   });
 
-  const type = useWatch({ control, name: "type" });
+  const type = useWatch({ control, name: "type" }) || "";
   const isRecurring = useWatch({ control, name: "isRecurring" });
   const date = useWatch({ control, name: "date" });
-  const accountId = useWatch({ control, name: "accountId" });
-  const category = useWatch({ control, name: "category" });
-  const recurringInterval = useWatch({ control, name: "recurringInterval" });
+  const accountId = useWatch({ control, name: "accountId" }) || "";
+  const category = useWatch({ control, name: "category" }) || "";
+  const recurringInterval = useWatch({ control, name: "recurringInterval" }) || "";
 
   const filteredCategories = categories.filter((c) => c.type === type);
 

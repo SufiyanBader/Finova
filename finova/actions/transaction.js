@@ -325,9 +325,21 @@ If the image is not a receipt, return an empty object: {}
     const cleaned = rawText.replace(/^```(?:json)?\s*/i, "").replace(/```\s*$/i, "").trim();
 
     try {
-      const { amount, date, description, category, merchantName } =
-        JSON.parse(cleaned);
-      return { amount, date, description, category, merchantName };
+      const parsed = JSON.parse(cleaned);
+      if (Object.keys(parsed).length === 0) return {};
+
+      let amount = parsed.amount;
+      if (typeof amount === "string") {
+        amount = parseFloat(amount.replace(/[^0-9.-]+/g, "")) || 0;
+      }
+
+      return { 
+        amount, 
+        date: parsed.date, 
+        description: parsed.description, 
+        category: parsed.category, 
+        merchantName: parsed.merchantName 
+      };
     } catch (parseError) {
       console.error("[scanReceipt] Error parsing JSON:", parseError);
       throw new Error("Invalid response format from AI model");

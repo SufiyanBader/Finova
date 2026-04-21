@@ -12,9 +12,19 @@ const isProtectedRoute = createRouteMatcher([
   "/trips(.*)",
 ]);
 
-// @clerk/nextjs v6 middleware — use auth.protect() (async) for route guarding.
-// Rate-limiting lives in lib/rate-limit.js (Node.js runtime, per server action).
+const suspiciousPatterns = [
+  "wp-admin", "wp-login", ".php",
+  "xmlrpc", "eval(", "base64_decode",
+  "../", "etc/passwd", "cmd=", "exec(",
+];
+
 export default clerkMiddleware(async (auth, request) => {
+  const url = request.url.toLowerCase();
+  
+  if (suspiciousPatterns.some(pattern => url.includes(pattern))) {
+    return new Response("Forbidden", { status: 403 });
+  }
+
   if (isProtectedRoute(request)) {
     await auth.protect();
   }

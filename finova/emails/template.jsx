@@ -166,7 +166,7 @@ function clampPct(pct) {
 function Header() {
   return (
     <>
-      <Text style={logo}>Finova</Text>
+      <Text style={logo}>AI Finance</Text>
       <Text style={tagline}>Your personal finance companion</Text>
     </>
   );
@@ -177,9 +177,9 @@ function Footer() {
     <>
       <Hr style={divider} />
       <Text style={footer}>
-        You're receiving this email because you have an active Finova account.
+        You're receiving this email because you have an active AI Finance account.
         <br />
-        © {new Date().getFullYear()} Finova. All rights reserved.
+        © {new Date().getFullYear()} AI Finance. All rights reserved.
       </Text>
     </>
   );

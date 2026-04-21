@@ -189,7 +189,7 @@ export default function TripCharts({
                     </div>
                     <div className="h-2 bg-gray-100 dark:bg-gray-800 rounded-full overflow-hidden">
                       <div
-                        className="h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all"
+                        className="h-2 rounded-full bg-gradient-to-r from-emerald-500 to-teal-500 transition-all"
                         style={{
                           width: `${(item.value / maxValue) * 100}%`,
                         }}

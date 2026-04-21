@@ -23,7 +23,7 @@ export default async function Header() {
         <Link href="/">
           <Image
             src="/logo.png"
-            alt="Finova"
+            alt="AI Finance"
             width={200}
             height={60}
             className="h-12 w-auto object-contain"

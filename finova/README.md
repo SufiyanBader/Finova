@@ -1,4 +1,4 @@
-# Finova — AI-Powered Personal Finance Platform
+# AI Finance — AI-Powered Personal Finance Platform
 
 > Full-stack Next.js 15 finance app with AI receipt scanning, budget alerts,
 > recurring transactions, and monthly report emails.
@@ -23,7 +23,7 @@
 ## Project Structure
 
 ```
-finova/
+ai-finance/
 ├── prisma/
 │   └── schema.prisma          # DB schema – User, Account, Transaction, Budget
 ├── lib/
@@ -59,7 +59,7 @@ finova/
 
 ```bash
 git clone <your-repo>
-cd finova
+cd ai-finance
 npm install
 ```
 

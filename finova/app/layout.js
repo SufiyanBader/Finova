@@ -12,7 +12,7 @@ import { CurrencyProvider } from "@/components/currency-provider";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Finova",
+  title: "AI Finance",
   description: "AI-powered personal finance platform",
 };
 

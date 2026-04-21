@@ -157,7 +157,7 @@ export default function ExpenseList({ expenses, tripId: _tripId, baseCurrency })
                   <div className="flex items-center gap-3 text-xs text-muted-foreground">
                     <span>{format(new Date(expense.date), "MMM d")}</span>
                     {expense.currency !== baseCurrency && (
-                      <span className="text-blue-600">
+                      <span className="text-emerald-600">
                         {getCurrencySymbol(expense.currency)}
                         {expense.amount.toFixed(2)} {expense.currency}
                       </span>

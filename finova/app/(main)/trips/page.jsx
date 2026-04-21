@@ -4,7 +4,7 @@ import TripCard from "./_components/trip-card";
 import { Plane } from "lucide-react";
 
 export const metadata = {
-  title: "Trips | Finova",
+  title: "Trips | AI Finance",
   description: "Track your travel expenses in multiple currencies",
 };
 
@@ -30,8 +30,8 @@ export default async function TripsPage() {
       {/* Empty State */}
       {trips.length === 0 && (
         <div className="text-center py-20">
-          <div className="bg-blue-50 dark:bg-blue-950/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
-            <Plane className="h-10 w-10 text-blue-600" />
+          <div className="bg-emerald-50 dark:bg-emerald-950/30 rounded-full w-20 h-20 flex items-center justify-center mx-auto mb-4">
+            <Plane className="h-10 w-10 text-emerald-600" />
           </div>
           <h2 className="text-xl font-semibold mb-2">No trips yet</h2>
           <p className="text-muted-foreground mb-6 max-w-sm mx-auto">

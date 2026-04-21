@@ -14,7 +14,7 @@ export default function ChatWidget() {
     {
       id: 1,
       role: "model",
-      content: "Hello! I am Finova AI. Ask me anything about your finances.",
+      content: "Hello! I am AI Finance assistant. Ask me anything about your finances.",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -75,10 +75,10 @@ export default function ChatWidget() {
     <div className="fixed bottom-6 right-6 z-50">
       {isOpen && (
         <div className="bg-white dark:bg-gray-900 rounded-xl shadow-2xl border w-80 sm:w-96 flex flex-col overflow-hidden max-h-[80vh] h-[500px] mb-4">
-          <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 flex items-center justify-between">
+          <div className="bg-gradient-to-r from-emerald-600 to-teal-600 p-4 flex items-center justify-between">
             <div className="flex items-center gap-2">
               <Bot className="h-5 w-5 text-white" />
-              <span className="text-white font-semibold">Finova AI</span>
+              <span className="text-white font-semibold">AI Finance</span>
               <span className="text-xs bg-white/20 text-white px-2 py-0.5 rounded-full">
                 Beta
               </span>
@@ -106,7 +106,7 @@ export default function ChatWidget() {
                   className={cn(
                     "w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0",
                     message.role === "model"
-                      ? "bg-blue-100 text-blue-600"
+                      ? "bg-emerald-100 text-emerald-600"
                       : "bg-gray-100 text-gray-600"
                   )}
                 >
@@ -122,7 +122,7 @@ export default function ChatWidget() {
                     "rounded-lg px-3 py-2 text-sm max-w-[75%]",
                     message.role === "model"
                       ? "bg-gray-100 dark:bg-gray-800 text-foreground"
-                      : "bg-blue-600 text-white"
+                      : "bg-emerald-600 text-white"
                   )}
                 >
                   {message.content}
@@ -132,8 +132,8 @@ export default function ChatWidget() {
 
             {isLoading && (
               <div className="flex gap-2 items-center">
-                <div className="bg-blue-100 rounded-full w-7 h-7 flex items-center justify-center">
-                  <Bot className="h-4 w-4 text-blue-600" />
+                <div className="bg-emerald-100 rounded-full w-7 h-7 flex items-center justify-center">
+                  <Bot className="h-4 w-4 text-emerald-600" />
                 </div>
                 <div className="bg-gray-100 dark:bg-gray-800 rounded-lg px-3 py-2">
                   <div className="flex gap-1">

@@ -72,8 +72,8 @@ export default function TransactionTable({ transactions, accountId }) {
     direction: "desc",
   });
   const [searchTerm, setSearchTerm] = useState("");
-  const [typeFilter, setTypeFilter] = useState("");
-  const [recurringFilter, setRecurringFilter] = useState("");
+  const [typeFilter, setTypeFilter] = useState("ALL");
+  const [recurringFilter, setRecurringFilter] = useState("ALL");
 
   const {
     loading: deleteLoading,
@@ -114,8 +114,8 @@ export default function TransactionTable({ transactions, accountId }) {
 
   const handleClearFilters = () => {
     setSearchTerm("");
-    setTypeFilter("");
-    setRecurringFilter("");
+    setTypeFilter("ALL");
+    setRecurringFilter("ALL");
     setSelectedIds([]);
   };
 
@@ -128,7 +128,7 @@ export default function TransactionTable({ transactions, accountId }) {
       );
     }
 
-    if (typeFilter) {
+    if (typeFilter && typeFilter !== "ALL") {
       result = result.filter((t) => t.type === typeFilter);
     }
 
@@ -169,7 +169,7 @@ export default function TransactionTable({ transactions, accountId }) {
     );
   };
 
-  const hasActiveFilters = searchTerm || typeFilter || recurringFilter;
+  const hasActiveFilters = searchTerm || typeFilter !== "ALL" || recurringFilter !== "ALL";
 
   return (
     <div className="space-y-4">
@@ -200,7 +200,7 @@ export default function TransactionTable({ transactions, accountId }) {
               <SelectValue placeholder="All Types" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Types</SelectItem>
+              <SelectItem value="ALL">All Types</SelectItem>
               <SelectItem value="INCOME">Income</SelectItem>
               <SelectItem value="EXPENSE">Expense</SelectItem>
             </SelectContent>
@@ -211,7 +211,7 @@ export default function TransactionTable({ transactions, accountId }) {
               <SelectValue placeholder="All" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All</SelectItem>
+              <SelectItem value="ALL">All</SelectItem>
               <SelectItem value="recurring">Recurring</SelectItem>
               <SelectItem value="non-recurring">Non-Recurring</SelectItem>
             </SelectContent>
@@ -340,7 +340,7 @@ export default function TransactionTable({ transactions, accountId }) {
                       <TooltipProvider>
                         <Tooltip>
                           <TooltipTrigger>
-                            <Badge className="gap-1 bg-purple-100 text-purple-700 hover:bg-purple-200">
+                            <Badge className="gap-1 bg-teal-100 text-teal-700 hover:bg-teal-200">
                               <RefreshCw className="h-3 w-3" />
                               {RECURRING_INTERVALS[transaction.recurringInterval]}
                             </Badge>

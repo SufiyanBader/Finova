@@ -3,7 +3,7 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from "react";
 import { createFormatter, DEFAULT_CURRENCY, CURRENCIES } from "@/lib/currencies";
 
-const STORAGE_KEY = "finova_currency";
+const STORAGE_KEY = "ai_finance_currency";
 
 const CurrencyContext = createContext(null);
 

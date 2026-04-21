@@ -36,7 +36,7 @@ export default function LandingPage() {
       </section>
 
       {/* How It Works */}
-      <section className="bg-blue-50 py-20">
+      <section className="bg-emerald-50 py-20">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl font-bold text-center mb-12 gradient-title">
             How It Works
@@ -44,7 +44,7 @@ export default function LandingPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {howItWorksData.map((step, index) => (
               <div key={index} className="text-center">
-                <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
                   {step.icon}
                 </div>
                 <h3 className="text-lg font-semibold mb-2">{step.title}</h3>
@@ -58,19 +58,19 @@ export default function LandingPage() {
 
 
       {/* CTA */}
-      <section className="bg-blue-600 py-20">
+      <section className="bg-emerald-600 py-20">
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl font-bold text-white mb-4">
             Ready to Take Control of Your Finances?
           </h2>
-          <p className="text-blue-100 mb-8 max-w-xl mx-auto">
-            Take the first step towards financial freedom with Finova&apos;s
+          <p className="text-emerald-100 mb-8 max-w-xl mx-auto">
+            Take the first step towards financial freedom with AI Finance&apos;s
             AI-powered tracking and smart analytics.
           </p>
           <Link href="/dashboard">
             <Button
               size="lg"
-              className="bg-white text-blue-600 hover:bg-blue-50 px-8 py-6 text-lg animate-bounce"
+              className="bg-white text-emerald-600 hover:bg-emerald-50 px-8 py-6 text-lg animate-bounce"
             >
               Start for Free Today
             </Button>
@@ -79,10 +79,10 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-blue-50 py-8">
+      <footer className="bg-emerald-50 py-8">
         <div className="container mx-auto px-4">
           <p className="text-center text-gray-600">
-            Made with care by the Finova Team
+            Made with care by the AI Finance Team
           </p>
         </div>
       </footer>

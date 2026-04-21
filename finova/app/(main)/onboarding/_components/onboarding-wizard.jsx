@@ -99,7 +99,7 @@ export default function OnboardingWizard() {
       <div className="mb-8 flex justify-between items-center relative">
         <div className="absolute left-0 top-1/2 w-full h-1 bg-gray-200 dark:bg-gray-700 -z-10 transform -translate-y-1/2 rounded-full" />
         <div
-          className="absolute left-0 top-1/2 h-1 bg-blue-600 -z-10 transform -translate-y-1/2 transition-all duration-300 rounded-full"
+          className="absolute left-0 top-1/2 h-1 bg-emerald-600 -z-10 transform -translate-y-1/2 transition-all duration-300 rounded-full"
           style={{ width: `${((step - 1) / 2) * 100}%` }}
         />
         {steps.map((label, index) => {
@@ -110,7 +110,7 @@ export default function OnboardingWizard() {
               <div
                 className={`w-8 h-8 rounded-full flex items-center justify-center font-bold text-sm border-2 ${
                   isActive
-                    ? "bg-blue-600 border-blue-600 text-white"
+                    ? "bg-emerald-600 border-emerald-600 text-white"
                     : isCompleted
                     ? "bg-green-500 border-green-500 text-white"
                     : "bg-white dark:bg-gray-800 border-gray-300 text-gray-400"
@@ -128,8 +128,8 @@ export default function OnboardingWizard() {
         {step === 1 && (
           <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur">
             <CardHeader className="text-center">
-              <div className="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Building2 className="h-6 w-6 text-blue-600" />
+              <div className="w-12 h-12 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <Building2 className="h-6 w-6 text-emerald-600" />
               </div>
               <CardTitle className="text-2xl">Create Your First Account</CardTitle>
               <CardDescription>
@@ -181,8 +181,8 @@ export default function OnboardingWizard() {
         {step === 2 && (
           <Card className="shadow-lg border-0 bg-white/90 dark:bg-gray-900/90 backdrop-blur animate-in fade-in slide-in-from-right-4">
             <CardHeader className="text-center">
-              <div className="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-2">
-                <Target className="h-6 w-6 text-purple-600" />
+              <div className="w-12 h-12 bg-teal-100 rounded-full flex items-center justify-center mx-auto mb-2">
+                <Target className="h-6 w-6 text-teal-600" />
               </div>
               <CardTitle className="text-2xl">Set a Monthly Budget</CardTitle>
               <CardDescription>

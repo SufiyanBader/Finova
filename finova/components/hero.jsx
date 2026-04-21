@@ -58,7 +58,7 @@ export default function HeroSection() {
           <div ref={imageRef} className="hero-image">
             <Image
               src="/banner.jpeg"
-              alt="Finova dashboard preview"
+              alt="AI Finance dashboard preview"
               width={1280}
               height={720}
               className="rounded-xl shadow-2xl border mx-auto"

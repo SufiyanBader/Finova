@@ -32,7 +32,7 @@ export default function WeekdayPatternChart({ data }) {
       return (
         <div className="bg-white dark:bg-gray-800 p-2 border rounded shadow">
           <p className="font-semibold">{payload[0].payload.day}</p>
-          <p className="text-blue-600">
+          <p className="text-emerald-600">
             Avg: {formatCurrency(payload[0].value)}
           </p>
         </div>

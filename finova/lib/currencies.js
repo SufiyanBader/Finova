@@ -1,5 +1,5 @@
 /**
- * Supported currencies for Finova.
+ * Supported currencies for AI Finance.
  * Each entry maps to a valid BCP 47 locale + ISO 4217 currency code
  * so Intl.NumberFormat can do all the heavy lifting.
  */
