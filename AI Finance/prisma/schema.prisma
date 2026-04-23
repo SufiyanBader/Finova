@@ -1,0 +1,283 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+enum AccountType {
+  CURRENT
+  SAVINGS
+}
+
+enum TransactionType {
+  INCOME
+  EXPENSE
+}
+
+enum RecurringInterval {
+  DAILY
+  WEEKLY
+  MONTHLY
+  YEARLY
+}
+
+enum TransactionStatus {
+  PENDING
+  COMPLETED
+  FAILED
+}
+
+model User {
+  id            String        @id @default(uuid())
+  clerkUserId   String        @unique
+  email         String        @unique
+  name          String?
+  imageUrl      String?
+  accounts      Account[]
+  transactions  Transaction[]
+  budgets       Budget?
+  goals         Goal[]
+  notifications Notification[]
+  trips         Trip[]
+  tripExpenses  TripExpense[]
+  portfolios    Portfolio[]
+  isOnboarded   Boolean       @default(false)
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+
+  @@map("users")
+}
+
+model Account {
+  id           String        @id @default(uuid())
+  name         String
+  type         AccountType
+  balance      Decimal       @default(0)
+  isDefault    Boolean       @default(false)
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  transactions Transaction[]
+  goals        Goal[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([userId])
+  @@map("accounts")
+}
+
+model Transaction {
+  id                String             @id @default(uuid())
+  type              TransactionType
+  amount            Decimal
+  description       String?
+  date              DateTime
+  category          String
+  receiptUrl        String?
+  isRecurring       Boolean            @default(false)
+  recurringInterval RecurringInterval?
+  nextRecurringDate DateTime?
+  lastProcessed     DateTime?
+  status            TransactionStatus  @default(COMPLETED)
+  userId            String
+  user              User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId         String
+  account           Account            @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  createdAt         DateTime           @default(now())
+  updatedAt         DateTime           @updatedAt
+
+  @@index([userId])
+  @@index([accountId])
+  @@map("transactions")
+}
+
+model Budget {
+  id            String    @id @default(uuid())
+  amount        Decimal
+  lastAlertSent DateTime?
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("budgets")
+}
+
+model Goal {
+  id            String    @id @default(uuid())
+  name          String
+  targetAmount  Decimal
+  savedAmount   Decimal   @default(0)
+  deadline      DateTime?
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accountId     String?
+  account       Account?  @relation(fields: [accountId], references: [id], onDelete: Cascade)
+  isCompleted   Boolean   @default(false)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  @@index([userId])
+  @@map("goals")
+}
+
+model Notification {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  title     String
+  message   String
+  type      String
+  isRead    Boolean  @default(false)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@map("notifications")
+}
+
+model Trip {
+  id           String        @id @default(uuid())
+  name         String
+  destination  String
+  baseCurrency String        @default("USD")
+  budget       Decimal?
+  startDate    DateTime
+  endDate      DateTime?
+  isCompleted  Boolean       @default(false)
+  coverColor   String        @default("#6366f1")
+  userId       String
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expenses     TripExpense[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+
+  @@index([userId])
+  @@map("trips")
+}
+
+model TripExpense {
+  id              String   @id @default(uuid())
+  description     String
+  amount          Decimal
+  currency        String
+  convertedAmount Decimal
+  exchangeRate    Decimal
+  category        String
+  date            DateTime
+  notes           String?
+  tripId          String
+  trip            Trip     @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  userId          String
+  user            User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+
+  @@index([tripId])
+  @@index([userId])
+  @@index([tripId, date])
+  @@map("trip_expenses")
+}
+
+model CurrencyRate {
+  id             String   @id @default(uuid())
+  baseCurrency   String
+  targetCurrency String
+  rate           Decimal
+  fetchedAt      DateTime @default(now())
+
+  @@unique([baseCurrency, targetCurrency])
+  @@map("currency_rates")
+}
+
+enum AssetType {
+  STOCK
+  CRYPTO
+  ETF
+  MUTUAL_FUND
+  MANUAL
+}
+
+enum PortfolioTransactionType {
+  BUY
+  SELL
+}
+
+model Portfolio {
+  id           String             @id @default(uuid())
+  name         String
+  description  String?
+  color        String             @default("#6366f1")
+  userId       String
+  user         User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  holdings     PortfolioHolding[]
+  transactions PortfolioTransaction[]
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+
+  @@index([userId])
+  @@map("portfolios")
+}
+
+model PortfolioHolding {
+  id              String       @id @default(uuid())
+  portfolioId     String
+  portfolio       Portfolio    @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  symbol          String
+  name            String
+  assetType       AssetType
+  quantity        Decimal
+  averageBuyPrice Decimal
+  currentPrice    Decimal      @default(0)
+  lastPriceUpdate DateTime?
+  sector          String?
+  userId          String
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@unique([portfolioId, symbol])
+  @@index([portfolioId])
+  @@index([userId])
+  @@map("portfolio_holdings")
+}
+
+model PortfolioTransaction {
+  id          String                   @id @default(uuid())
+  portfolioId String
+  portfolio   Portfolio                @relation(fields: [portfolioId], references: [id], onDelete: Cascade)
+  symbol      String
+  name        String
+  assetType   AssetType
+  type        PortfolioTransactionType
+  quantity    Decimal
+  price       Decimal
+  totalAmount Decimal
+  fees        Decimal                  @default(0)
+  date        DateTime
+  notes       String?
+  userId      String
+  createdAt   DateTime                 @default(now())
+  updatedAt   DateTime                 @updatedAt
+
+  @@index([portfolioId])
+  @@index([userId])
+  @@map("portfolio_transactions")
+}
+
+model AssetPrice {
+  id            String    @id @default(uuid())
+  symbol        String
+  assetType     AssetType
+  price         Decimal
+  change        Decimal   @default(0)
+  changePercent Decimal   @default(0)
+  currency      String    @default("USD")
+  fetchedAt     DateTime  @default(now())
+
+  @@unique([symbol, assetType])
+  @@map("asset_prices")
+}
