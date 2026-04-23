@@ -10,6 +10,8 @@ import PortfolioCharts from "./_components/portfolio-charts";
 import AddHoldingSheet from "./_components/add-holding-sheet";
 import TransactionHistory from "./_components/transaction-history";
 
+export const dynamic = "force-dynamic";
+
 export default async function PortfolioDetailPage({ params }) {
   const { id } = await params;
   const portfolio = await getPortfolioById(id);
@@ -34,7 +36,7 @@ export default async function PortfolioDetailPage({ params }) {
         </Suspense>
 
         <Suspense fallback={<BarLoader className="mt-4" width={"100%"} color="#2563eb" />}>
-          <HoldingsList holdings={portfolio.holdings} portfolioId={portfolio.id} />
+          <HoldingsList holdings={portfolio.holdings} />
         </Suspense>
       </div>
 

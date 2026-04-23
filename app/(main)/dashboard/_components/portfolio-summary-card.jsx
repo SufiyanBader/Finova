@@ -1,9 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { TrendingUp, Briefcase, ArrowUpRight } from "lucide-react";
+import { Briefcase, ArrowUpRight } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { formatPrice, getChangeColor } from "@/lib/market-data";
+import { formatPrice } from "@/lib/market-data";
 
 export default function PortfolioSummaryCard({ data }) {
   if (!data) return null;

@@ -9,7 +9,7 @@ import { removeHolding } from "@/actions/portfolio";
 import useFetch from "@/hooks/use-fetch";
 import { formatPrice, formatPercent, getChangeColor } from "@/lib/market-data";
 
-export default function HoldingsList({ holdings, portfolioId }) {
+export default function HoldingsList({ holdings }) {
   const {
     loading: removeLoading,
     fn: removeFn,

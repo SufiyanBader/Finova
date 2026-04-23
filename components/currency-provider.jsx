@@ -36,7 +36,7 @@ export function CurrencyProvider({ children }) {
   }, []);
 
   const formatCurrency = useCallback(
-    createFormatter(currencyCode),
+    (...args) => createFormatter(currencyCode)(...args),
     [currencyCode]
   );
 

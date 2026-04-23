@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 
 const fadeUp = (delay = 0) => ({
@@ -335,7 +334,7 @@ export default function LandingPage() {
             style={{ fontFamily: "'DM Serif Display', serif", fontStyle: "italic", letterSpacing: "-0.02em", lineHeight: 1.3 }}
             className="text-3xl md:text-4xl text-white/70 mb-8"
           >
-            "I spent 3 years thinking I had a spending problem. Turns out I had a visibility problem."
+            &quot;I spent 3 years thinking I had a spending problem. Turns out I had a visibility problem.&quot;
           </div>
           <div
             style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 300 }}
@@ -376,7 +375,7 @@ export default function LandingPage() {
               style={{ fontFamily: "'DM Sans', sans-serif", fontWeight: 400 }}
               className="px-12 py-5 rounded-full bg-emerald-400 text-black text-base hover:bg-emerald-300 transition-all hover:scale-105 active:scale-100 shadow-[0_0_60px_rgba(52,211,153,0.2)]"
             >
-              Begin — it's free
+              Begin &mdash; it&apos;s free
             </button>
           </Link>
           <p

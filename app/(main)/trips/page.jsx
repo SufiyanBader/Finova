@@ -8,6 +8,8 @@ export const metadata = {
   description: "Track your travel expenses in multiple currencies",
 };
 
+export const dynamic = "force-dynamic";
+
 export default async function TripsPage() {
   const trips = await getTrips();
 

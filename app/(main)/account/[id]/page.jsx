@@ -5,6 +5,8 @@ import { getAccountWithTransactions } from "@/actions/accounts";
 import AccountChart from "./_components/account-chart";
 import TransactionTable from "./_components/transaction-table";
 
+export const dynamic = "force-dynamic";
+
 export default async function AccountPage({ params }) {
   const { id } = await params;
   const accountData = await getAccountWithTransactions(id);

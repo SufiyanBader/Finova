@@ -38,7 +38,6 @@ const CHART_COLORS = [
 export default function PortfolioCharts({
   holdings,
   allocationByType,
-  sectorAllocation,
   history,
 }) {
   const allocationPieData = Object.entries(allocationByType)

@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { toast } from "sonner";
-import { Loader2, Plus, Search, TrendingUp } from "lucide-react";
+import { Loader2, Plus, Search } from "lucide-react";
 
 import {
   Sheet,
@@ -66,8 +66,6 @@ export default function AddHoldingSheet({ portfolioId }) {
 
   const watchedType = watch("assetType");
   const watchedSymbol = watch("symbol");
-  const watchedName = watch("name");
-
   useEffect(() => {
     if (searchQuery.length < 1 || watchedType === "MANUAL") {
       setSearchResults([]);

@@ -9,6 +9,8 @@ import CreateAccountDrawer from "@/components/create-account-drawer";
 import { Plus } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
+export const dynamic = "force-dynamic";
+
 // Skeleton shown while accounts load
 function AccountsSkeleton() {
   return (

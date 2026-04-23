@@ -1,10 +1,10 @@
-import { Suspense } from "react";
-import { BarLoader } from "react-spinners";
 import { Briefcase } from "lucide-react";
 import { getPortfolios, getNetWorth } from "@/actions/portfolio";
 import CreatePortfolioDialog from "./_components/create-portfolio-dialog";
 import PortfolioCard from "./_components/portfolio-card";
 import NetWorthBanner from "./_components/net-worth-banner";
+
+export const dynamic = "force-dynamic";
 
 export default async function PortfolioPage() {
   const [portfolios, netWorth] = await Promise.all([
