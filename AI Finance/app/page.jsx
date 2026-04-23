@@ -60,7 +60,7 @@ export default function LandingPage() {
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap');
         * { box-sizing: border-box; }
-        body { margin: 0; background: #080810; }
+        body { margin: 0; }
       `}</style>
 
       {/* Subtle grid texture */}
@@ -195,7 +195,7 @@ export default function LandingPage() {
              <img
               src="/dashboard-preview.png"
               alt="Dashboard Preview"
-              className="max-h-full w-full object-cover rounded-lg opacity-90 group-hover:opacity-100 transition-opacity"
+              className="max-h-full object-contain rounded-lg shadow-2xl"
               />
           </div>
         </motion.div>

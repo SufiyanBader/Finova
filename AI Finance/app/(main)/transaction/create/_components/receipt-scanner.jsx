@@ -14,6 +14,7 @@ export default function ReceiptScanner({ onScanComplete }) {
     loading: scanLoading,
     fn: scanFn,
     data: scannedData,
+    error,
   } = useFetch(scanReceipt);
 
   const handleReceiptScan = async (file) => {
