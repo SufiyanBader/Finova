@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter, CURRENCIES } from "@/lib/currencies";
 
 const DATE_RANGES = {
   "1W": { label: "Last Week", days: 7 },
@@ -35,9 +35,10 @@ const DATE_RANGES = {
   ALL: { label: "All Time", days: null },
 };
 
-export default function AccountChart({ transactions }) {
+export default function AccountChart({ transactions, currency: currencyCode }) {
   const [dateRange, setDateRange] = useState("1M");
-  const { formatCurrency, currentCurrency } = useCurrency();
+  const formatCurrency = createFormatter(currencyCode);
+  const currency = CURRENCIES.find((c) => c.code === currencyCode) || CURRENCIES[0];
 
   const filteredData = useMemo(() => {
     const range = DATE_RANGES[dateRange];
@@ -158,7 +159,7 @@ export default function AccountChart({ transactions }) {
                 fontSize={12}
                 tickLine={false}
                 axisLine={false}
-                tickFormatter={(v) => currentCurrency.symbol + v}
+                tickFormatter={(v) => currency.symbol + v}
               />
               <Tooltip formatter={(v) => formatCurrency(v ?? 0)} />
               <Legend />

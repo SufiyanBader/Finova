@@ -29,7 +29,7 @@ import { createTransaction, updateTransaction } from "@/actions/transaction";
 import useFetch from "@/hooks/use-fetch";
 import ReceiptScanner from "./receipt-scanner";
 import CreateAccountDrawer from "@/components/create-account-drawer";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter } from "@/lib/currencies";
 
 export default function AddTransactionForm({
   accounts,
@@ -40,7 +40,6 @@ export default function AddTransactionForm({
   const router = useRouter();
   const searchParams = useSearchParams();
   const editId = searchParams.get("edit");
-  const { formatCurrency } = useCurrency();
 
   const {
     loading: transactionLoading,
@@ -189,7 +188,7 @@ export default function AddTransactionForm({
               <SelectContent>
                 {accounts.map((account) => (
                   <SelectItem key={account.id} value={account.id}>
-                    {account.name} ({formatCurrency(parseFloat(account.balance))})
+                    {account.name} ({createFormatter(account.currency)(parseFloat(account.balance))})
                   </SelectItem>
                 ))}
               </SelectContent>

@@ -27,9 +27,13 @@ import {
 import { accountSchema } from "@/lib/schema";
 import { createAccount } from "@/actions/dashboard";
 import useFetch from "@/hooks/use-fetch";
+import { CURRENCIES, DEFAULT_CURRENCY } from "@/lib/currencies";
+import { useCurrency } from "./currency-provider";
 
 export default function CreateAccountDrawer({ children }) {
   const [open, setOpen] = useState(false);
+
+  const { currencyCode } = useCurrency();
 
   const {
     register,
@@ -44,6 +48,7 @@ export default function CreateAccountDrawer({ children }) {
       name: "",
       type: "SAVINGS",
       balance: "",
+      currency: currencyCode || DEFAULT_CURRENCY,
       isDefault: false,
     },
   });
@@ -133,6 +138,31 @@ export default function CreateAccountDrawer({ children }) {
               {errors.balance && (
                 <p className="text-sm text-destructive">
                   {errors.balance.message}
+                </p>
+              )}
+            </div>
+
+            {/* Account Currency */}
+            <div className="space-y-1">
+              <Label htmlFor="currency">Account Currency</Label>
+              <Select
+                defaultValue={watch("currency")}
+                onValueChange={(v) => setValue("currency", v)}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Select currency" />
+                </SelectTrigger>
+                <SelectContent>
+                  {CURRENCIES.map((currency) => (
+                    <SelectItem key={currency.code} value={currency.code}>
+                      {currency.name} ({currency.code})
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+              {errors.currency && (
+                <p className="text-sm text-destructive">
+                  {errors.currency.message}
                 </p>
               )}
             </div>

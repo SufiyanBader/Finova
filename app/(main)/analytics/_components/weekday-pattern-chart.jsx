@@ -10,10 +10,10 @@ import {
   Tooltip,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter } from "@/lib/currencies";
 
-export default function WeekdayPatternChart({ data }) {
-  const { formatCurrency } = useCurrency();
+export default function WeekdayPatternChart({ data, currency }) {
+  const formatCurrency = createFormatter(currency);
   if (!data || data.length === 0) {
     return (
       <Card>

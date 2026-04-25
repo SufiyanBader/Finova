@@ -19,16 +19,16 @@ export default async function AnalyticsPage() {
         <h1 className="text-3xl md:text-5xl gradient-title">Analytics</h1>
       </div>
 
-      <AnalyticsStatCards data={data} />
+      <AnalyticsStatCards data={data} currency={defaultAccount?.currency} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <MonthlyTrendsChart data={data.monthlyTrends} />
-        <CategoryBreakdownChart data={data.categoryBreakdown} />
+        <MonthlyTrendsChart data={data.monthlyTrends} currency={defaultAccount?.currency} />
+        <CategoryBreakdownChart data={data.categoryBreakdown} currency={defaultAccount?.currency} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <WeekdayPatternChart data={data.weekdayPattern} />
-        <TopMerchantsCard data={data.topMerchants} />
+        <WeekdayPatternChart data={data.weekdayPattern} currency={defaultAccount?.currency} />
+        <TopMerchantsCard data={data.topMerchants} currency={defaultAccount?.currency} />
       </div>
     </div>
   );

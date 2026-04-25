@@ -11,10 +11,11 @@ import {
   Legend,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter, CURRENCIES } from "@/lib/currencies";
 
-export default function MonthlyTrendsChart({ data }) {
-  const { formatCurrency, currentCurrency } = useCurrency();
+export default function MonthlyTrendsChart({ data, currency: currencyCode }) {
+  const formatCurrency = createFormatter(currencyCode);
+  const currency = CURRENCIES.find((c) => c.code === currencyCode) || CURRENCIES[0];
   if (!data || data.length === 0) {
     return (
       <Card>
@@ -49,7 +50,7 @@ export default function MonthlyTrendsChart({ data }) {
               </defs>
               <CartesianGrid strokeDasharray="3 3" vertical={false} />
               <XAxis dataKey="month" />
-              <YAxis tickFormatter={(value) => currentCurrency.symbol + value} />
+              <YAxis tickFormatter={(value) => currency.symbol + value} />
               <Tooltip formatter={(value) => formatCurrency(value)} />
               <Legend />
               <Area

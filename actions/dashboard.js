@@ -83,6 +83,7 @@ export async function createAccount(data) {
           name: sanitizeString(data.name),
           type: data.type,
           balance: balanceFloat,
+          currency: data.currency,
           isDefault: shouldBeDefault,
           userId: user.id,
         },

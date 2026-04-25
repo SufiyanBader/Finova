@@ -50,6 +50,7 @@ async function DashboardContent() {
         <BudgetProgress
           initialBudget={budgetData?.budget}
           currentExpenses={budgetData?.currentExpenses ?? 0}
+          currency={defaultAccount.currency}
         />
       )}
 

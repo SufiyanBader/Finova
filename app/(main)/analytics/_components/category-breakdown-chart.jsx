@@ -10,10 +10,11 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter, CURRENCIES } from "@/lib/currencies";
 
-export default function CategoryBreakdownChart({ data }) {
-  const { formatCurrency, currentCurrency } = useCurrency();
+export default function CategoryBreakdownChart({ data, currency: currencyCode }) {
+  const formatCurrency = createFormatter(currencyCode);
+  const currency = CURRENCIES.find((c) => c.code === currencyCode) || CURRENCIES[0];
   if (!data || data.length === 0) {
     return (
       <Card>
@@ -58,7 +59,7 @@ export default function CategoryBreakdownChart({ data }) {
               margin={{ top: 5, right: 30, left: 40, bottom: 5 }}
             >
               <CartesianGrid strokeDasharray="3 3" horizontal={false} />
-              <XAxis type="number" tickFormatter={(value) => currentCurrency.symbol + value} />
+              <XAxis type="number" tickFormatter={(value) => currency.symbol + value} />
               <YAxis
                 dataKey="category"
                 type="category"

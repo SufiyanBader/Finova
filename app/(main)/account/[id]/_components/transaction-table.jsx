@@ -54,7 +54,7 @@ import useFetch from "@/hooks/use-fetch";
 import { categoryColors } from "@/data/categories";
 import ExportButton from "@/components/export-button";
 import ImportButton from "@/components/import-button";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter } from "@/lib/currencies";
 
 const RECURRING_INTERVALS = {
   DAILY: "Daily",
@@ -63,9 +63,9 @@ const RECURRING_INTERVALS = {
   YEARLY: "Yearly",
 };
 
-export default function TransactionTable({ transactions, accountId }) {
+export default function TransactionTable({ transactions, accountId, currency }) {
   const router = useRouter();
-  const { formatCurrency } = useCurrency();
+  const formatCurrency = createFormatter(currency);
   const [selectedIds, setSelectedIds] = useState([]);
   const [sortConfig, setSortConfig] = useState({
     field: "date",

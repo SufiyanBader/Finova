@@ -14,11 +14,11 @@ import {
 import { Switch } from "@/components/ui/switch";
 import { updateDefaultAccount } from "@/actions/dashboard";
 import useFetch from "@/hooks/use-fetch";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter } from "@/lib/currencies";
 
 export default function AccountCard({ account }) {
-  const { name, type, balance, id, isDefault } = account;
-  const { formatCurrency } = useCurrency();
+  const { name, type, balance, id, isDefault, currency } = account;
+  const formatAccountCurrency = createFormatter(currency);
 
   const {
     loading: updateDefaultLoading,
@@ -62,7 +62,7 @@ export default function AccountCard({ account }) {
         </CardHeader>
         <CardContent>
           <div className="text-2xl font-bold">
-            {formatCurrency(parseFloat(balance))}
+            {formatAccountCurrency(parseFloat(balance))}
           </div>
           <p className="text-xs text-muted-foreground capitalize">
             {type.charAt(0) + type.slice(1).toLowerCase()} Account

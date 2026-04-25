@@ -2,10 +2,10 @@
 
 import { TrendingUp, TrendingDown, PiggyBank, Activity } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter } from "@/lib/currencies";
 
-export default function AnalyticsStatCards({ data }) {
-  const { formatCurrency } = useCurrency();
+export default function AnalyticsStatCards({ data, currency }) {
+  const formatCurrency = createFormatter(currency);
 
   return (
     <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-4">

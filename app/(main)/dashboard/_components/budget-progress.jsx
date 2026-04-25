@@ -14,14 +14,14 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { updateBudget } from "@/actions/budget";
 import useFetch from "@/hooks/use-fetch";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter } from "@/lib/currencies";
 
-export default function BudgetProgress({ initialBudget, currentExpenses }) {
+export default function BudgetProgress({ initialBudget, currentExpenses, currency }) {
   const [isEditing, setIsEditing] = useState(false);
   const [newBudget, setNewBudget] = useState(
     initialBudget?.amount?.toString() ?? ""
   );
-  const { formatCurrency } = useCurrency();
+  const formatCurrency = createFormatter(currency);
 
   const {
     loading: isLoading,

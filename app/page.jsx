@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 const fadeUp = (delay = 0) => ({
@@ -190,11 +191,13 @@ export default function LandingPage() {
               app.finova.co/dashboard
             </div>
           </div>
-          <div className="h-64 md:h-96 bg-gradient-to-br from-emerald-500/10 via-transparent to-violet-500/10 rounded-xl flex items-center justify-center">
-             <img
+          <div className="relative h-64 md:h-96 bg-gradient-to-br from-emerald-500/10 via-transparent to-violet-500/10 rounded-xl flex items-center justify-center overflow-hidden">
+             <Image
               src="/dashboard-preview.png"
               alt="Dashboard Preview"
-              className="max-h-full object-contain rounded-lg shadow-2xl"
+              fill
+              className="object-contain rounded-lg shadow-2xl p-2"
+              priority
               />
           </div>
         </motion.div>

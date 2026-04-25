@@ -2,10 +2,10 @@
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { useCurrency } from "@/components/currency-provider";
+import { createFormatter } from "@/lib/currencies";
 
-export default function TopMerchantsCard({ data }) {
-  const { formatCurrency } = useCurrency();
+export default function TopMerchantsCard({ data, currency }) {
+  const formatCurrency = createFormatter(currency);
   if (!data || data.length === 0) {
     return (
       <Card>
