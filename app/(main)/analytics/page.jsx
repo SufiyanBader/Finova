@@ -19,11 +19,11 @@ export default async function AnalyticsPage() {
         <h1 className="text-3xl md:text-5xl gradient-title">Analytics</h1>
       </div>
 
-      <AnalyticsStatCards data={data} currency={defaultAccount?.currency} />
+      <AnalyticsStatCards data={data} />
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        <MonthlyTrendsChart data={data.monthlyTrends} currency={defaultAccount?.currency} />
-        <CategoryBreakdownChart data={data.categoryBreakdown} currency={defaultAccount?.currency} />
+        <MonthlyTrendsChart data={data.monthlyTrends} />
+        <CategoryBreakdownChart data={data.categoryBreakdown} />
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">

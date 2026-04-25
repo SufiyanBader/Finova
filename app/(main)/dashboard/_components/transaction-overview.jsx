@@ -25,6 +25,7 @@ import {
   ResponsiveContainer,
 } from "recharts";
 import { createFormatter } from "@/lib/currencies";
+import { useCurrency } from "@/components/currency-provider";
 
 const COLORS = [
   "#6366f1",
@@ -44,7 +45,7 @@ export default function DashboardOverview({ accounts, transactions }) {
   );
 
   const selectedAccount = accounts.find((a) => a.id === selectedAccountId);
-  const formatCurrency = createFormatter(selectedAccount?.currency || "USD");
+  const { formatCurrency } = useCurrency();
 
   const accountTransactions = transactions.filter(
     (t) => t.accountId === selectedAccountId
