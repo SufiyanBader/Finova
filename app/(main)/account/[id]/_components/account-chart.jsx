@@ -38,7 +38,6 @@ const DATE_RANGES = {
 export default function AccountChart({ transactions, currency: currencyCode }) {
   const [dateRange, setDateRange] = useState("1M");
   const formatCurrency = createFormatter(currencyCode);
-  const currency = CURRENCIES.find((c) => c.code === currencyCode) || CURRENCIES[0];
 
   const filteredData = useMemo(() => {
     const range = DATE_RANGES[dateRange];

@@ -15,7 +15,6 @@ import { useCurrency } from "@/components/currency-provider";
 
 export default function AdvancedSearchPanel({ transactions, accounts: _accounts }) {
   const [searchQuery, setSearchQuery] = useState("");
-  const { formatCurrency } = useCurrency();
   const [selectedTypes, setSelectedTypes] = useState([]);
   const [selectedCategories, setSelectedCategories] = useState([]);
   const [minAmount, setMinAmount] = useState("");
