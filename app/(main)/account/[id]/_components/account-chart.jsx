@@ -25,7 +25,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { createFormatter, CURRENCIES } from "@/lib/currencies";
+import { createFormatter } from "@/lib/currencies";
 
 const DATE_RANGES = {
   "1W": { label: "Last Week", days: 7 },

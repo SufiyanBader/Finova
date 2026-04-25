@@ -7,10 +7,9 @@ import {
   UserButton,
 } from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
-import { LayoutDashboard, PenBox, Target, BarChart3, Search, Menu, Plane, TrendingUp } from "lucide-react";
+import { PenBox, Search } from "lucide-react";
 import ThemeToggle from "@/components/theme-toggle";
 import NotificationBell from "@/components/notifications/notification-bell";
-import { Drawer, DrawerContent, DrawerTrigger } from "@/components/ui/drawer";
 import { checkUser } from "@/lib/check-user";
 import CurrencySelector from "@/components/currency-selector";
 import MainNav from "./main-nav";
