@@ -485,7 +485,7 @@ export async function getNetWorth() {
   }
 }
 
-import { POPULAR_STOCKS, POPULAR_CRYPTO } from "@/lib/constants";
+import { POPULAR_STOCKS, POPULAR_INDIAN_STOCKS, POPULAR_CRYPTO } from "@/lib/constants";
 
 export async function searchAssets(query, type) {
   try {
@@ -497,12 +497,23 @@ export async function searchAssets(query, type) {
     let results = [];
 
     if (type === "STOCK" || type === "ETF" || type === "ALL") {
+      // Search US stocks
       const stockResults = POPULAR_STOCKS.filter(
         (s) =>
           s.symbol.toLowerCase().includes(lowerQuery) ||
           s.name.toLowerCase().includes(lowerQuery)
-      ).map((s) => ({ ...s, assetType: "STOCK" }));
-      results = [...results, ...stockResults];
+      ).map((s) => ({ ...s, assetType: "STOCK", exchange: "US" }));
+
+      // Search Indian NSE stocks
+      const indianResults = POPULAR_INDIAN_STOCKS.filter(
+        (s) =>
+          s.symbol.toLowerCase().includes(lowerQuery) ||
+          // Also match without .NS suffix (e.g. "tcs" matches "TCS.NS")
+          s.symbol.replace(".NS", "").toLowerCase().includes(lowerQuery) ||
+          s.name.toLowerCase().includes(lowerQuery)
+      ).map((s) => ({ ...s, assetType: "STOCK", exchange: "NSE" }));
+
+      results = [...results, ...stockResults, ...indianResults];
     }
 
     if (type === "CRYPTO" || type === "ALL") {
@@ -514,7 +525,7 @@ export async function searchAssets(query, type) {
       results = [...results, ...cryptoResults];
     }
 
-    return results.slice(0, 10);
+    return results.slice(0, 12);
   } catch (error) {
     return [];
   }

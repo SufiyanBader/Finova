@@ -28,7 +28,7 @@ import {
 import { holdingSchema } from "@/lib/portfolio-schema";
 import { addHolding, searchAssets } from "@/actions/portfolio";
 import useFetch from "@/hooks/use-fetch";
-import { POPULAR_STOCKS, POPULAR_CRYPTO } from "@/lib/constants";
+import { POPULAR_STOCKS, POPULAR_INDIAN_STOCKS, POPULAR_CRYPTO } from "@/lib/constants";
 import { useCurrency } from "@/components/currency-provider";
 
 /** Returns the unit label for the quantity field based on asset type + symbol. */
@@ -47,6 +47,8 @@ export default function AddHoldingSheet({ portfolioId }) {
   const [searchResults, setSearchResults] = useState([]);
   const [selectedAsset, setSelectedAsset] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
+  // Tab for quick-pick popular stocks: "US" or "IN"
+  const [stockRegion, setStockRegion] = useState("US");
 
   const {
     register,
@@ -218,9 +220,23 @@ export default function AddHoldingSheet({ portfolioId }) {
                             {asset.name}
                           </span>
                         </div>
-                        <Badge variant="outline" className="text-xs">
-                          {asset.assetType}
-                        </Badge>
+                        <div className="flex items-center gap-1">
+                          {asset.exchange && (
+                            <Badge
+                              variant="outline"
+                              className={`text-xs ${
+                                asset.exchange === "NSE"
+                                  ? "border-orange-400 text-orange-600"
+                                  : "border-blue-400 text-blue-600"
+                              }`}
+                            >
+                              {asset.exchange}
+                            </Badge>
+                          )}
+                          <Badge variant="outline" className="text-xs">
+                            {asset.assetType}
+                          </Badge>
+                        </div>
                       </button>
                     ))}
                   </div>
@@ -228,8 +244,34 @@ export default function AddHoldingSheet({ portfolioId }) {
 
                 {searchQuery.length === 0 && (watchedType === "STOCK" || watchedType === "CRYPTO") && (
                   <div className="border rounded-lg p-3">
+                    {watchedType === "STOCK" && (
+                      <div className="flex gap-1 mb-2">
+                        <button
+                          type="button"
+                          onClick={() => setStockRegion("US")}
+                          className={`text-xs px-2 py-0.5 rounded-full border transition-colors ${
+                            stockRegion === "US"
+                              ? "bg-blue-600 text-white border-blue-600"
+                              : "text-muted-foreground border-muted hover:bg-muted"
+                          }`}
+                        >
+                          🇺🇸 US
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setStockRegion("IN")}
+                          className={`text-xs px-2 py-0.5 rounded-full border transition-colors ${
+                            stockRegion === "IN"
+                              ? "bg-orange-500 text-white border-orange-500"
+                              : "text-muted-foreground border-muted hover:bg-muted"
+                          }`}
+                        >
+                          🇮🇳 India (NSE)
+                        </button>
+                      </div>
+                    )}
                     <p className="text-xs text-muted-foreground mb-2">
-                      Popular {watchedType.toLowerCase()}s:
+                      Popular {watchedType === "CRYPTO" ? "crypto" : stockRegion === "IN" ? "Indian" : "US"} {watchedType === "CRYPTO" ? "" : "stocks"}:
                     </p>
                     <div className="flex flex-wrap gap-1">
                       {watchedType === "CRYPTO"
@@ -243,12 +285,23 @@ export default function AddHoldingSheet({ portfolioId }) {
                               {c.symbol}
                             </Badge>
                           ))
+                        : stockRegion === "IN"
+                        ? POPULAR_INDIAN_STOCKS.slice(0, 8).map((s) => (
+                            <Badge
+                              key={s.symbol}
+                              variant="outline"
+                              className="cursor-pointer hover:bg-muted border-orange-300 text-orange-700"
+                              onClick={() => handleSelectAsset({ ...s, assetType: "STOCK", exchange: "NSE" })}
+                            >
+                              {s.symbol.replace(".NS", "")}
+                            </Badge>
+                          ))
                         : POPULAR_STOCKS.slice(0, 6).map((s) => (
                             <Badge
                               key={s.symbol}
                               variant="outline"
                               className="cursor-pointer hover:bg-muted"
-                              onClick={() => handleSelectAsset({ ...s, assetType: "STOCK" })}
+                              onClick={() => handleSelectAsset({ ...s, assetType: "STOCK", exchange: "US" })}
                             >
                               {s.symbol}
                             </Badge>
