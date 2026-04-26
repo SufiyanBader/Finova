@@ -3,6 +3,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { db } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 import {
   getAssetPrice,
   getBulkPrices,
@@ -112,10 +113,13 @@ export async function getPortfolios() {
 
     if (!user) throw new Error("User not found");
 
+    const cookieStore = await cookies();
+    const uiCurrency = cookieStore.get("ai_finance_currency")?.value;
+
     const defaultAccount = await db.account.findFirst({
       where: { userId: user.id, isDefault: true },
     });
-    const baseCurrency = defaultAccount ? defaultAccount.currency : "USD";
+    const baseCurrency = uiCurrency || (defaultAccount ? defaultAccount.currency : "USD");
 
     const portfolios = await db.portfolio.findMany({
       where: { userId: user.id },
@@ -189,10 +193,13 @@ export async function getPortfolioById(portfolioId) {
 
     if (!user) throw new Error("User not found");
 
+    const cookieStore = await cookies();
+    const uiCurrency = cookieStore.get("ai_finance_currency")?.value;
+
     const defaultAccount = await db.account.findFirst({
       where: { userId: user.id, isDefault: true },
     });
-    const baseCurrency = defaultAccount ? defaultAccount.currency : "USD";
+    const baseCurrency = uiCurrency || (defaultAccount ? defaultAccount.currency : "USD");
 
     const portfolio = await db.portfolio.findUnique({
       where: {

@@ -20,6 +20,7 @@ export function CurrencyProvider({ children }) {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved && CURRENCIES.some((c) => c.code === saved)) {
         setCurrencyCodeState(saved);
+        document.cookie = `${STORAGE_KEY}=${saved}; path=/; max-age=31536000`; // 1 year
       }
     } catch {
       // localStorage unavailable (e.g. SSR) — use default
@@ -30,6 +31,7 @@ export function CurrencyProvider({ children }) {
     setCurrencyCodeState(code);
     try {
       localStorage.setItem(STORAGE_KEY, code);
+      document.cookie = `${STORAGE_KEY}=${code}; path=/; max-age=31536000`; // 1 year
     } catch {
       // ignore
     }
